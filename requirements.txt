@@ -1,0 +1,8 @@
+flask
+redis
+nltk
+asyncio
+autobahn
+flask-sqlalchemy
+sqlalchemy
+psycopg2

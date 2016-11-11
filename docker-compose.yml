@@ -1,0 +1,20 @@
+version: '2'
+services:
+  feb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    environment:
+      - RDS_HOSTNAME
+      - RDS_USERNAME
+      - RDS_DB_NAME
+      - RDS_PASSWORD
+      - RDS_PORT
+    depends_on:
+      - redis
+  redis:
+    image: redis
