@@ -6,4 +6,5 @@ COPY ./requirements.txt /src/requirements.txt
 RUN pip3.5 install -r /src/requirements.txt
 
 VOLUME ['/src']
-WORKDIR '/src'
+WORKDIR 'src'
+
