@@ -16,12 +16,17 @@ coins = [['btc', 'bitcoin'], ['fct', 'factom'], ['eth', 'ether', 'ethereum'],
 
 class PoloniexComponent(ApplicationSession):
     def onConnect(self):
+        print('start of connect')
         url = db_url()
+        print('url')
         engine = create_engine(url)
+        print('engine')
         Session = sessionmaker(bind=engine)
         self.session = Session()
+        print('after connect')
         self.msg_buffer = []
         self.join(self.config.realm)
+        
         
     @coroutine
     def onJoin(self, details):

@@ -7,12 +7,12 @@ def db_url():
             'NAME': os.environ['RDS_DB_NAME'],
             'USER': os.environ['RDS_USERNAME'],
             'PSWD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ[
-                'RDS_HOSTNAME'],
+            'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
         }
 
     except:
+        print('db vars not set')
         raise OSError('Database environment variables not set')
 
 
