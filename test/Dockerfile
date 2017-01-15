@@ -7,4 +7,4 @@ RUN git clone https://github.com/SamJohannes/polo-analyser.git
 RUN pip3.5 install -r /polo-analyser/requirements.txt
 
 ENTRYPOINT ["python"]
-CMD ["/polo-analyser/polo.py"]
+CMD ["/polo-analyser/messages_connection.py"]
