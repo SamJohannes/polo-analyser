@@ -1,7 +1,7 @@
 from autobahn.asyncio.wamp import ApplicationSession
 from autobahn.asyncio.wamp import ApplicationRunner
 
-from db.schema import Messages
+from db.schema import Tickers
 from db.db_url import db_url
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -10,20 +10,18 @@ from asyncio import coroutine
 import nltk
 
 
-coins = [['btc', 'bitcoin'], ['fct', 'factom'], ['eth', 'ether', 'ethereum'],
-         ['xrp', 'ripple'], ['ltc', 'litecoin'], ['xmr', 'monero'],
-         ['etc'], ['dash'], ['steem'], ['nem'], ['maid', 'maidsafecoin'], ['lsk', 'lisk']]
+# coins = [['btc', 'bitcoin'], ['fct', 'factom'], ['eth', 'ether', 'ethereum'],
+#          ['xrp', 'ripple'], ['ltc', 'litecoin'], ['xmr', 'monero'],
+#          ['etc'], ['dash'], ['steem'], ['nem'], ['maid', 'maidsafecoin'], ['lsk', 'lisk']]
 
 class PoloniexComponent(ApplicationSession):
     def onConnect(self):
-        print('start of connect')
+        print('Starting connection to Tickers server')
         url = db_url()
-        print('url')
         engine = create_engine(url)
-        print('engine')
         Session = sessionmaker(bind=engine)
         self.session = Session()
-        print('after connect')
+        print('Database connection to Tickers successful')
         self.msg_buffer = []
         self.join(self.config.realm)
         
@@ -54,18 +52,6 @@ class PoloniexComponent(ApplicationSession):
             yield from self.subscribe(onTicker, 'trollbox')
         except Exception as e:
             print("Could not subscribe to topic:", e)
-
-    def getScore(self, msg):
-        pass
-
-    def updateScore(self, score, currency):
-        pass
-
-    def initialiseScores(self):
-        self.scores = {}
-        for coin in coins:
-            self.scores[coin] = 0
-        print('scores')
 
 
 def main():
